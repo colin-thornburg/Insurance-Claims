@@ -2,10 +2,10 @@ version: 2
 
 models:
   - name: claims
+    access: public
     config:
       contract:
         enforced: true
-      public: true
     description: "Detailed information about insurance claims"
     columns:
       - name: claim_id
@@ -39,10 +39,10 @@ models:
         data_type: date
 
   - name: monthly_claims
+    access: public
     config:
       contract:
         enforced: true
-      public: true
     description: "Monthly summary of claims by claim type"
     columns:
       - name: month
