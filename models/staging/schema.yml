@@ -1,0 +1,98 @@
+version: 2
+
+models:
+  - name: claims
+    config:
+      contract:
+        enforced: false
+      public: false
+    description: "Detailed information about insurance claims"
+    columns:
+      - name: claim_id
+        description: "Unique identifier for each claim"
+        data_type: varchar
+        constraints:
+          - type: not_null
+          - type: unique
+      - name: policy_id
+        description: "Identifier of the policy associated with the claim"
+        data_type: varchar
+        constraints:
+          - type: not_null
+      - name: claim_date
+        description: "Date when the claim was filed"
+        data_type: date
+      - name: claim_amount
+        description: "Amount claimed"
+        data_type: float
+      - name: claim_status
+        description: "Current status of the claim"
+        data_type: varchar
+      - name: claim_type
+        description: "Type of claim"
+        data_type: varchar
+      - name: adjuster_id
+        description: "Identifier of the adjuster handling the claim"
+        data_type: varchar
+      - name: settlement_date
+        description: "Date when the claim was settled"
+        data_type: date
+
+  - name: monthly_claims
+    config:
+      contract:
+        enforced: true
+      public: true
+    description: "Monthly summary of claims by claim type"
+    columns:
+      - name: month
+        description: "Month of the summary"
+        data_type: date
+        constraints:
+          - type: not_null
+      - name: claim_type
+        description: "Type of claim"
+        data_type: varchar
+      - name: claim_count
+        description: "Number of claims in the month for the claim type"
+        data_type: integer
+      - name: total_claim_amount
+        description: "Total amount claimed in the month for the claim type"
+        data_type: float
+      - name: avg_claim_amount
+        description: "Average amount claimed in the month for the claim type"
+        data_type: float
+      - name: active_adjusters
+        description: "Number of unique adjusters handling claims in the month for the claim type"
+        data_type: integer
+
+  - name: claim_settlement_time
+    description: "Analysis of claim settlement times"
+    columns:
+      - name: claim_id
+        description: "Unique identifier for each claim"
+        data_type: varchar
+        constraints:
+          - type: not_null
+          - type: unique
+      - name: policy_id
+        description: "Identifier of the policy associated with the claim"
+        data_type: varchar
+      - name: claim_date
+        description: "Date when the claim was filed"
+        data_type: date
+      - name: settlement_date
+        description: "Date when the claim was settled"
+        data_type: date
+      - name: claim_status
+        description: "Current status of the claim"
+        data_type: varchar
+      - name: claim_type
+        description: "Type of claim"
+        data_type: varchar
+      - name: claim_amount
+        description: "Amount claimed"
+        data_type: float
+      - name: days_to_settle
+        description: "Number of days between claim filing and settlement"
+        data_type: integer
